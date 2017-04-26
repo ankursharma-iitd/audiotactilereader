@@ -49,8 +49,6 @@ Public Class Converter
         End If
         While str.Chars(j) <= "9" And str.Chars(j) >= "0"
             val = Convert.ToInt32(str.Chars(j)) - zero + val * 10
-            ' MsgBox(str.Chars(j))
-            'Console.WriteLine(filestr.Chars(j))
             j += 1
         End While
         GetInt = sign * val
@@ -92,7 +90,6 @@ Public Class Converter
         Dim filestr As String = My.Computer.FileSystem.ReadAllText(inl)
         Dim fs = CreateObject("SAPI.spFileStream")
         Dim voice = CreateObject("SAPI.spVoice")
-        'fs.Format.Type = SAPI.SAFT22kHz16BitMono
         fs.Open(inl, 3, False)
         voice.AudioOutputStream = fs
         voice.Speak(filestr)
