@@ -18,16 +18,16 @@ Extensions that can be added -
 4. Add a more complex method of face detection to include a wider range of convex figures too.
 
 Acknowledgment - 
-Ms Ankita Gulati
-Mr. Anupam Sobti
+Ms Ankita Gulati,
+Mr. Anupam Sobti,
 Prof. M. Balakrishnan
 
 Contributors - 
-Prakhar Ganesh
-Rahul Agarwal
-Rohit Raj
-Sagar Goyal
-Ankur Sharma
+Prakhar Ganesh,
+Rahul Agarwal,
+Rohit Raj,
+Sagar Goyal,
+Ankur Sharma,
 Raghav Garg
 
 Read More from - 
