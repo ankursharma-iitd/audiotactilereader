@@ -13,7 +13,9 @@ Public Class Converter
     Public isClosed() As Boolean
     Public numPaths As Integer = 0
 
-
+    'Function to calculate the angle made by a line with axis
+    'if line passes through (x1,y1) (x2,y2) then to calculate angle pass (x2-x1) and (y2-y1) as inputs
+    'the output is between o and 360 depending upon in which quardant line lies
     Public Function GetAngle(ByVal x As Double, ByVal y As Double) As Double
         Dim angle As Double
         If x = 0 Then
@@ -38,7 +40,8 @@ Public Class Converter
         End If
         GetAngle = angle
     End Function
-
+    'return an int starting from the given index j in the str and ending until there is a numerical haracter
+    'update the value of j also to the endingpoint + 1
     Public Function GetInt(ByRef str As String, ByRef j As Integer) As Integer
         Dim val As Integer = 0
         Dim zero As Integer = Convert.ToInt32(("0"c))
@@ -106,8 +109,17 @@ Public Class Converter
         Dim y2 As Integer
         Dim filestr As String
         filestr = My.Computer.FileSystem.ReadAllText(s)
+        
+        'replace commas by spaces so the file is easy to read
         filestr = filestr.Replace(",", " ")
+        
+        
+        'element path and polygon has nearly same format
+        'so replace "polygon" by "path" and "points" by "d"
+        'now path and polygon can be handled similarly
         filestr = filestr.Replace("polygon", "path").Replace("points", "d")
+        
+        'read the height and width of the svg
         Dim index As Integer = 0
         index = filestr.IndexOf("viewBox", index)
         index = index + 9
@@ -121,7 +133,8 @@ Public Class Converter
 
         wid = x2 - x1
         hei = y2 - y1
-
+        
+        'calculate the no of paths and polygons
         While True
             index = filestr.IndexOf("<", index)
             If index < 0 Then
@@ -133,15 +146,23 @@ Public Class Converter
             index += 1
         End While
 
-
+            'set MAXPATH to 5*MAXPATH because a single path elament can contain multiple paths
+            '5 is just a random number it can be changed depending on the testcases
         MAXPATH = 5 * MAXPATH
         Dim str As String = "path"
         Dim start_index As Integer = 0
         Dim x As Integer = 0
         Dim y As Integer = 0
+            
+            'initialize the variables
         ReDim points(MAXPATH, MAXSIZE)
         ReDim pathLength(MAXPATH)
         ReDim isClosed(MAXPATH)
+            
+            'set all path to closed initially this is necessary
+            'because the defalt valuse for polygon is closed
+            'and we are handling path and polygon in the same way
+            'in case of path this will set accodingly
         For i As Integer = 0 To MAXPATH
             isClosed(i) = True
         Next
@@ -153,7 +174,10 @@ Public Class Converter
         End If
         numPaths = 0
 
-        
+        'while loop to read the paths from string
+        'first it set different flags to default values
+        'then if a command comes lik "m" "M" "z" "c" etc it changes the flag accordingly
+        'if a number comes it stores the number according to the flag sets
         While doloop
             Dim a_index As Integer = 0
             Dim flag As Boolean = False
