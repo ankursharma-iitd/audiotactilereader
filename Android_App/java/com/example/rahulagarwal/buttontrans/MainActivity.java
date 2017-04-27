@@ -74,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
                     downloadManager = (DownloadManager)getSystemService(Context.DOWNLOAD_SERVICE);
                     Uri uri = Uri.parse("http://www.cse.iitd.ac.in/~cs1150251/CV.pdf");
 
-                    //URLConnection uconn = uri.ope
                     DownloadManager.Request request = new DownloadManager.Request(uri);
                     request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
 
@@ -90,10 +89,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "DOWNLOAD FAILED", Toast.LENGTH_SHORT).show();
         }
 
-//        Intent myIntent = new Intent(MainActivity.this, secondact.class);
-//        myIntent.putExtra("key", value); //Optional parameters
-//        MainActivity.this.startActivity(myIntent);
-//        // currentt.setText("Finger Detected : "+gcounter);
 
         mrecord.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,7 +112,6 @@ public class MainActivity extends AppCompatActivity {
         mscanner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-               // currentt.setText("Finger Detected : "+gcounter);
                 IntentIntegrator integrator = new IntentIntegrator(activity);
                 integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
                 integrator.setPrompt("Scan");
@@ -132,7 +126,6 @@ public class MainActivity extends AppCompatActivity {
         mscanner_page.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                // currentt.setText("Finger Detected : "+gcounter);
                 IntentIntegrator integrator = new IntentIntegrator(activity);
                 integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
                 integrator.setPrompt("Scan");
@@ -175,11 +168,6 @@ public class MainActivity extends AppCompatActivity {
             try {
                 audioplayer text1 = new audioplayer();
                 tet = text1.readinputfile("qrtable.txt");
-           /* InputStream fi = getAssets().open("qrtable.txt");
-            int size = fi.available();
-            byte[] buffer = new byte[size];
-            fi.read(buffer);
-            tet = new String(buffer);*/
 
             } catch (Exception e) {
             }
@@ -214,11 +202,6 @@ public class MainActivity extends AppCompatActivity {
             try {
                 audioplayer text1 = new audioplayer();
                 tet = text1.readinputfile(folder+"/qrtable.txt");
-           /* InputStream fi = getAssets().open("qrtable.txt");
-            int size = fi.available();
-            byte[] buffer = new byte[size];
-            fi.read(buffer);
-            tet = new String(buffer);*/
                  s = new Scanner(tet);
                  k = s.next();
                 k=s.next();
