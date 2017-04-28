@@ -11,5 +11,3 @@ The process can be roughly divided into following steps -
 5. Mapping data to the desired faces.
 6. Converting data in form of text file (if any) into audio files
 7. Exporting the page so that all the relevant files are copied/created to the location specified
-
-Refer to this blog for more details :-
