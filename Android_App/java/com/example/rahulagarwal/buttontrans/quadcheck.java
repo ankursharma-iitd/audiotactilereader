@@ -12,6 +12,9 @@ import static com.example.rahulagarwal.buttontrans.MainActivity.inputfile;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 
+/**
+ * Created by RAHUL AGARWAL on 02-03-2017.
+ */
 
 public class quadcheck {
 
@@ -84,6 +87,74 @@ public class quadcheck {
 
         return false; // Doesn't fall in any of the above cases
     }
+
+// Returns true if the point p lies inside the polygon[] with n vertices
+/*bool isInside(Point polygon[], int n, Point p)
+{
+    // There must be at least 3 vertices in polygon[]
+    if (n < 3)  return false;
+
+    // Create a point for line segment from p to infinite
+    Point extreme = {INF, p.y};
+
+    // Count intersections of the above line with sides of polygon
+    int count = 0, i = 0;
+    do
+    {
+        int next = (i+1)%n;
+
+        // Check if the line segment from 'p' to 'extreme' intersects
+        // with the line segment from 'polygon[i]' to 'polygon[next]'
+        if(p.x==0&&p.y==0)
+        {
+          cout<<p.x<<"L"<<p.y<<" "<<n;
+        }
+        cout<<"Start:"<<next;
+        if (doIntersect(polygon[i], polygon[next], p, extreme))
+        {
+            // If the point 'p' is colinear with line segment 'i-next',
+            // then check if it lies on segment. If it lies, return true,
+            // otherwise false
+
+            if (orientation(polygon[i], p, polygon[next]) == 0)
+            {
+                cout<<"ll "<<polygon[i].x<<" "<<polygon[i].y<<" "<<p.x<<" "<<p.y<<" "<<polygon[next].x<<" "<<polygon[next].y;
+               return onSegment(polygon[i], p, polygon[next]);
+             }
+               cout<<"         k     ";
+            if(polygon[next].y==p.y)
+            {
+             Point q;
+             q.x=p.x;
+             q.y=p.y+0.01;
+             extreme.y=extreme.y+0.01;
+            cout<<q.x<<" "<<q.y<<" ";
+             if(!(doIntersect(polygon[i], polygon[next], q, extreme)&&doIntersect(polygon[i+1], polygon[(next+1)%n], q, extreme)))
+                {
+                    //cout<<"KI";
+                    q.y=p.y-0.01;
+                    extreme.y=extreme.y-0.01;
+                     cout<<q.x<<" "<<q.y<<" ";
+                if(!(doIntersect(polygon[i], polygon[next], q, extreme)&&doIntersect(polygon[i+1], polygon[(next+1)%n], q, extreme)))
+                    {
+                    count++;
+                    cout<<"LLLL";
+                    }
+                }
+              i++;
+              next++;
+            }
+            else
+             count++;
+        }
+        cout<<"End: "<<next;
+        i = next;
+
+    } while (i != 0);
+
+    // Return true if count is odd, false otherwise
+    return count&1;  // Same as (count%2 == 1)
+}*/
 
     // Driver program to test above functions
     int qu(String gh,int xf,int yf)
@@ -209,6 +280,65 @@ public class quadcheck {
             {
                 quadi = -1;
             }
+                        //cout<<xinter<<" ";
+                       // cpolygon=(int)xinter;
+                       /* if(xinter>=po.x&&(xinter<minx||flag==0))
+                        {
+                            minx=xinter;
+                            cpolygon=i;
+                            flag=1;
+                        }
+                        else if(xinter>=po.x&&xinter==minx)
+                        {
+                            //cout<<"lll";
+                            double mini = po.x;
+                            for(int ki=0;ki< poly[i].ns;ki++)
+                            {
+                                Point extreme1 = new Point();
+                                extreme1.x=-INF;
+                                extreme1.y=po.y;
+                                if(doIntersect(poly[i].p[k],poly[i].p[(k+1)%n],po,extreme1))
+                                {
+
+                                    double xinter1;
+                                  if(poly[i].p[(ki+1)%n].y!=poly[i].p[ki].y)
+                                        xinter1 = (po.y*(poly[i].p[(ki+1)%n].x-poly[i].p[ki].x)-(poly[i].p[(ki+1)%n].x*poly[i].p[ki].y-poly[i].p[ki].x*poly[i].p[(ki+1)%n].y))/(poly[i].p[(ki+1)%n].y-poly[i].p[ki].y);
+                                    else
+                                        xinter1 = poly[i].p[(ki+1)%n].x<poly[i].p[ki].x?poly[i].p[(ki+1)%n].x:poly[i].p[ki].x;
+                                    if(mini>xinter1)
+                                        mini=xinter1;
+                                }
+                            }
+                            int j=i;
+                            int ik = cpolygon;
+                            double mini2 = po.x;
+                            for(int ka=0;k< poly[ik].ns;k++)
+                            {
+                                extreme.x=-INF;
+                                extreme.y=po.y;
+                                if(doIntersect(poly[ik].p[ka],poly[ik].p[(ka+1)%n],po,extreme))
+                                {
+                                    //cout<<"hi";
+                                    double xinter1;
+                                    if(poly[ik].p[(ka+1)%n].y!=poly[ik].p[ka].y)
+                                        xinter1 = (po.y*(poly[ik].p[(ka+1)%n].x-poly[ik].p[ka].x)-(poly[ik].p[(ka+1)%n].x*poly[ik].p[ka].y-poly[ik].p[ka].x*poly[ik].p[(ka+1)%n].y))/(poly[ik].p[(ka+1)%n].y-poly[ik].p[ka].y);
+                                    else
+                                        xinter1 = poly[ik].p[(ka+1)%n].x<poly[ik].p[ka].x?poly[ik].p[(ka+1)%n].x:poly[ik].p[ka].x;
+                                    if(mini2>xinter)
+                                        mini2=xinter1;
+                                }
+                            }
+                            if(mini==po.x)
+                                cpolygon=ik;
+                            else if(mini2==po.x)
+                                cpolygon=j;
+                            else
+                                cpolygon= mini>mini2?j:ik;
+                            //cout<<cpolygon<<" "<<mini<<" "<<mini2;
+                        }*/
+
+
+
 
         }
         catch (Exception e)
@@ -217,26 +347,66 @@ public class quadcheck {
             quadi=99;
             System.out.println(e.toString());
         }
+    /*Point polygon1[] = {{-1, -1}, {-1, 0}, {0, 1}, {1, 0}, {1,-1}};
+    int n = sizeof(polygon1)/sizeof(polygon1[0]);
+    Point p = {0, 0.1};
+    isInside(polygon1, n, p)? cout << "Yes \n": cout << "No \n";
+
+    p = {5, 5};
+    isInside(polygon1, n, p)? cout << "Yes \n": cout << "No \n";
+
+    Point polygon2[] = {{1, 0}, {2, 0}, {2, 2},{-2,2},{-2,-2},{1,-2}};
+    p = {0, 0};
+    n = sizeof(polygon2)/sizeof(polygon2[0]);
+    isInside(polygon2, n, p)? cout << "Yes \n": cout << "No \n";
+
+    p = {5, 1};
+    isInside(polygon2, n, p)? cout << "Yes \n": cout << "No \n";
+
+    p = {8, 1};
+    isInside(polygon2, n, p)? cout << "Yes \n": cout << "No \n";
+
+    Point polygon3[] =  {{0, 0}, {10, 0}, {10, 10}, {0, 10}};
+    p = {-1,10};
+    n = sizeof(polygon3)/sizeof(polygon3[0]);
+    isInside(polygon3, n, p)? cout << "Yes \n": cout << "No \n";*/
+
         return 0;
     }
     void checkquad(int x, int y, Context mycontext)
     {
 
         try {
+            // textout.setText("Hioverflow");
+
             String tet= "";
+            //audioplayer text1 = new audioplayer();
             tet= inputfile;
+            /*InputStream fi = mycontext.getAssets().open(inputfile);
+            int size = fi.available();
+            byte[] buffer = new byte[size];
+            fi.read(buffer);
+            tet = new String(buffer);*/
             quadcheck op = new quadcheck();
             secondact.audiop1=tet+"X,y:- "+x+" "+y;
             op.qu(tet,x,y);
             quadi2=quadi2+"double";
             String ans = quadi + "";
             secondact.audiop1=ans;
+            // textout.setText(quadcheck.quadi+" ");
             String tk=" ";
             try {
+                //audioplayer tex1 = new audioplayer();
                 tk= audiofile;
+               /* InputStream fik = mycontext.getAssets().open(audiofile);
+                int sizea = fik.available();
+                byte[] buffere = new byte[sizea];
+                fik.read(buffere);
+                tk = new String(buffere);*/
             }
             catch (Exception e)
             {}
+            //secondact.audiop1=ans;
             Scanner s = new Scanner(tk);
             String k=s.next();
             k=s.next();
@@ -257,7 +427,9 @@ public class quadcheck {
         }
         catch (Exception e)
         {
+            //secondact.audiop1="opops";
             secondact.audiop1="apps";
+
         }
     }
 }
