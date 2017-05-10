@@ -1,5 +1,8 @@
 package com.example.rahulagarwal.buttontrans;
 
+/**
+ * Created by raj_rohit on 14/4/17.
+ */
 
 import android.content.Intent;
 import android.media.AudioManager;
@@ -51,7 +54,11 @@ public class audioplayer extends AppCompatActivity {
             e.printStackTrace();
         }
         return content;
-   
+       /* TextView file_content = (TextView)findViewById(R.id.filename);
+        if(file_content!=null)
+            file_content.setText(content);
+        else
+            file_content.setText("file not read");*/
     }
     private String getFileContent(String targetFilePath) throws IOException {
         File file = new File(targetFilePath);
@@ -88,6 +95,8 @@ public class audioplayer extends AppCompatActivity {
     {
         Intent myIntent = new Intent(this, MainActivity.class);
         MainActivity.glocon=0;
+//        myIntent.putExtra("book", book_naam); //Optional parameters
+//        myIntent.putExtra("page", page_naam); //Optional parameters
         this.startActivity(myIntent);
 
     }
@@ -117,6 +126,9 @@ public class audioplayer extends AppCompatActivity {
 
     public void play_audio()
     {
+
+       // get_text = (EditText)findViewById(R.id.audio_name_play);
+        //String get_name_of_string = get_text.getText().toString();
         final TextView display_text = (TextView) findViewById(R.id.display_text);
         if(secondact.audiop1.compareTo("apps")==0)
         {
@@ -129,7 +141,7 @@ public class audioplayer extends AppCompatActivity {
 
         }
         else {
-            // audio file can either have .mp3 or .wav format. This code will handle both
+            // audio file can either have .mp3 or .wav format. This code will hndle both
             String fileName1 = secondact.audiop + ".mp3";
             String fileName2 = secondact.audiop + ".wav"; //check this format
             String completePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/COP/" + MainActivity.locfile + fileName1;
