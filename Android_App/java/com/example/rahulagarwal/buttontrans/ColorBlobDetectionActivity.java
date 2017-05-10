@@ -20,6 +20,7 @@ import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.imgproc.Moments;
+//import org.opencv.samples.colorblobdetect.R;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -96,8 +97,16 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         setContentView(R.layout.colorb);
+       // book_name = getIntent().getExtras().getString("book");
+       // page_name = getIntent().getExtras().getString("page");
+
+        //if(getIntent().getExtras().getString("flag")!=null)
+          //  flag=Integer.parseInt(getIntent().getExtras().getString("flag"));
 
         mOpenCvCameraView = (CameraBridgeViewBase) findViewById(R.id.color_blob_detection_activity_surface_view);
         mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
@@ -178,8 +187,12 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
                     Moments p = mu.get(i);
                     int x = (int) (p.get_m10() / p.get_m00());
                     int y = (int) (p.get_m01() / p.get_m00());
+                    // Core.circle(mRgba, new Point(x, y), 4, new Scalar(255, 49, 0, 255));
+
                         xp=x;
                         yp=y;
+
+                    //textout.setText("X Y : - "+x +y);
                 }
             }
             else{
@@ -201,6 +214,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
                             int hop = getResources().getIdentifier("check_one", "raw", getPackageName());
                             MediaPlayer playsound = MediaPlayer.create(this, hop);
                             playsound.start();
+                            //Toast.makeText(getApplicationContext(), "1 tap", Toast.LENGTH_LONG).show();
                         }
                         else if(MainActivity.glocon==1 && reddetect==1) {
                             qrx2=xp;
@@ -212,6 +226,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
                             int hop = getResources().getIdentifier("check_two", "raw", getPackageName());
                             MediaPlayer playsound = MediaPlayer.create(this, hop);
                             playsound.start();
+                            //Toast.makeText(getApplicationContext(), "2 tap", Toast.LENGTH_LONG).show();
                         }
                         else if(MainActivity.glocon == 2 && reddetect ==1){
                             MainActivity.qrx3=xp;
@@ -223,9 +238,31 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
                             int hop = getResources().getIdentifier("calibrated", "raw", getPackageName());
                             MediaPlayer playsound = MediaPlayer.create(this, hop);
                             playsound.start();
+                            //Toast.makeText(getApplicationContext(), "3 tap", Toast.LENGTH_LONG).show();
                         }
+                /*       if (glocon == 0 && reddetect == 1 && (MainActivity.new_flag==0)) {
+                            qrx1 = xp;
+                            qry1 = yp;
+                           qrc = xp +  " "+ yp;
+                            glocon++;
+                           gcounter=0;
+                           reddetect =0;
+                           textout.setText("QR code detected");
 
-                        else if(reddetect==1) {
+                           //Toast.makeText(this, " first coordinate : " + xp +" " + yp, Toast.LENGTH_SHORT).show();
+                        } else if (glocon == 1 && reddetect==1 && (MainActivity.new_flag==0)) {
+                            qrx2 = xp;
+                            qry2 = yp;
+                           qrc = qrc +" "+ xp + " " + yp;
+                            glocon++;
+                           reddetect =0;
+                           gcounter=0;
+                           textout.setText("QR code Detected 2");
+
+                           //Toast.makeText(getApplicationContext(), " second coordinate : " + xp +" " + yp, Toast.LENGTH_LONG).show();
+                        }*/// else if (reddetect ==1){
+
+                         else if(reddetect==1) {
                               gcounter = 0;
                               quadcheck q1 = new quadcheck();
                               quadcheck.quadi = 7;
@@ -233,6 +270,9 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
 
                              int yfin = (int) getXcalib(xp, yp, MainActivity.qrx1, MainActivity.qry1, MainActivity.qrx2, MainActivity.qry2, MainActivity.qrx3, MainActivity.qry3);
                              int xfin = (int) getYcalib(xp, yp, MainActivity.qrx1, MainActivity.qry1, MainActivity.qrx2, MainActivity.qry2, MainActivity.qrx3, MainActivity.qry3);
+                              //xfin = 29700 - xp * 29700/1024;
+                              //yfin = yp * 21000/790;
+                            //Toast.makeText(getApplicationContext(), "final tap", Toast.LENGTH_LONG).show();
                               qrca = qrca + "X: " + xfin + "Y: " + yfin + " ";
                               qrc = qrca;
                               if( (yfin<21745 && yfin >18745) &&(xfin <30614 && xfin>27614) ){
@@ -253,9 +293,11 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
                                   reddetect = 0;
                                   qrc = qrc + " . " + quadi2;
                                   MainActivity.new_flag = 1;
+                                  // textout.setText("No.of Fingers : - " + gcounter);
                                   Intent myIntent = new Intent(ColorBlobDetectionActivity.this, audioplayer.class);
                                   myIntent.putExtra("book", book_name); //Optional parameters
                                   myIntent.putExtra("page", page_name); //Optional parameters
+                                  //  myIntent.putExtra("flag_value",flag);
                                   ColorBlobDetectionActivity.this.startActivity(myIntent);
                               }
                           }
@@ -265,6 +307,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
                 {
                     textout.setText("File1 Not Found, let's dance");
                 }
+                //  Core.circle(mRgba, new Point(x, y), 20, new Scalar(255,49,0,255));*/
 
             }
 
@@ -276,6 +319,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         {
             int x =500;
             int y=500;
+            //Core.circle(mRgba, new Point(x, y), 4, new Scalar(255,49,0,255));
 
         }
 
@@ -301,7 +345,67 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         double denm = (x1*y2-x2*y1) ;
         return ((x1*y0-x0*y1)/denm)*28429 ;
     }
-    
+   /* private double getXcalib(double x0, double y0, double x0qr, double y0qr, double x1qr, double y1qr, double x2qr, double y2qr){
+        double p2qr = 701.0;
+        double q2qr = 680.0;
+        double p1qr = 711.0;
+        double q1qr = 29109.0;
+        double p0qr = 20245.0;
+        double q0qr = 29114.0;
+
+        double xratio= (x2qr - x1qr)/(p2qr - p1qr);
+        double yratio= (y2qr - y0qr)/(q2qr - q1qr);
+        double newslope = (y2qr - y0qr)/(x2qr- x0qr);
+        double theta = atan(newslope);
+        double delta = atan(y0/x0);
+        double a = x0/(cos(delta));
+        double xnew = a * cos(delta - theta);
+        double ynew = a * sin(delta - theta);
+        double xfinal = -1 * xnew / xratio ;
+        return xfinal;
+    }*/
+  /*  private double getYcalib(double x0, double y0, double x0qr, double y0qr, double x1qr, double y1qr, double x2qr, double y2qr) {
+        double p2qr = 701.0;
+        double q2qr = 680.0;
+        double p1qr = 711.0;
+        double q1qr = 29109.0;
+        double p0qr = 20245.0;
+        double q0qr = 29114.0;
+        double xratio = (x2qr - x1qr) / (p2qr - p1qr);
+        double yratio = (y2qr - y1qr) / (q0qr - q1qr);
+        double newslope = (y2qr - y1qr) / (x2qr - x1qr);
+        double theta = atan(newslope);
+        double delta = atan(y0 / x0);
+        double a = x0 / (cos(delta));
+        double xnew = a * cos(delta - theta);
+        double ynew = a * sin(delta - theta);
+        double yfinal = ynew / yratio ;
+        return yfinal;
+    }*/
+
+/*
+    public class checker
+    {
+        public static void main ( String args [])
+        {
+            double x0, y0, x0qr, y0qr, x1qr, y1qr, x2qr, y2qr; //quantities obtained after scanning
+            double p0qr, q0qr, p1qr, q1qr, p2qr, q2qr; // known quantities
+            double xratio= (x2qr - x1qr)/(p2qr - p1qr);
+            double yratio= (y1qr - y0qr)/(q1qr - q0qr);
+            double newslope = (y2qr - y1qr)/(x2qr - x1qr);
+            double theta = arctan(newslope);
+            double delta = y0/x0;
+            double a = x0/(cos(delta));
+            double xnew = a * cos(delta - theta);
+            double ynew = a * sin(delta - theta);
+            double xfinal = xnew / xratio ;
+            double yfinal = ynew / yratio ;
+
+        }
+    }
+    */
+
+
     private Scalar converScalarHsv2Rgba(Scalar hsvColor) {
         Mat pointMatRgba = new Mat();
         Mat pointMatHsv = new Mat(1, 1, CvType.CV_8UC3, hsvColor);
